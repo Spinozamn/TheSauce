@@ -19,3 +19,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/settings.php';
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin', function () {
+        return Inertia::render('admin/dashboard');
+    })->name('admin.dashboard');
+
+    Route::get('/admin/innovaciones', function () {
+        return Inertia::render('admin/innovaciones/index');
+    })->name('admin.innovaciones.index');
+
+    Route::get('/admin/innovaciones/crear', function () {
+        return Inertia::render('admin/innovaciones/create');
+    })->name('admin.innovaciones.create');
+});
