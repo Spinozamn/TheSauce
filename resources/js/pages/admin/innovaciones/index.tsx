@@ -2,7 +2,6 @@ import AdminLayout from '@/layouts/admin-layout';
 import { Link } from '@inertiajs/react';
 
 export default function InnovacionesIndex() {
-    // Datos estáticos (Mock Data) como pide la actividad
     const innovaciones = [
         { id: 1, titulo: 'Sistema de riego inteligente con IoT', categoria: 'AgroTech', estado: 'Activo', meta: 75000 },
         { id: 2, titulo: 'App de reciclaje local comunitario', categoria: 'Tecnología', estado: 'Borrador', meta: 30000 },
