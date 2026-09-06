@@ -1,0 +1,7 @@
+{
+  "lista_deseos": [
+    { "id": 1, "usuario_id": 1, "innovacion_id": 3, "fecha_agregado": "2026-09-01" },
+    { "id": 2, "usuario_id": 2, "innovacion_id": 1, "fecha_agregado": "2026-09-02" },
+    { "id": 3, "usuario_id": 3, "innovacion_id": 2, "fecha_agregado": "2026-09-03" }
+  ]
+}

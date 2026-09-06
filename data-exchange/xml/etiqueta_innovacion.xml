@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etiqueta_innovacion>
+    <registro><id>1</id><etiqueta_id>1</etiqueta_id><innovacion_id>1</innovacion_id></registro>
+    <registro><id>2</id><etiqueta_id>2</etiqueta_id><innovacion_id>1</innovacion_id></registro>
+    <registro><id>3</id><etiqueta_id>1</etiqueta_id><innovacion_id>2</innovacion_id></registro>
+</etiqueta_innovacion>

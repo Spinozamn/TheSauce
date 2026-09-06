@@ -1,0 +1,32 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Mateo",
+      "apellido_paterno": "Vargas",
+      "email": "mateo@innovamx.com",
+      "rol": { "id": 1, "nombre": "cliente" },
+      "contribuciones": [
+        { "id": 1, "monto": 1500.00, "estado": "aprobada" }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Ana",
+      "apellido_paterno": "Lopez",
+      "email": "ana@tech.com",
+      "rol": { "id": 2, "nombre": "creador" },
+      "contribuciones": []
+    },
+    {
+      "id": 3,
+      "nombre": "Carlos",
+      "apellido_paterno": "Ruiz",
+      "email": "carlos@web.com",
+      "rol": { "id": 1, "nombre": "cliente" },
+      "contribuciones": [
+        { "id": 2, "monto": 3000.00, "estado": "aprobada" }
+      ]
+    }
+  ]
+}

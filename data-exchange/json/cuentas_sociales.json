@@ -1,0 +1,7 @@
+{
+  "cuentas_sociales": [
+    { "id": 1, "usuario_id": 1, "plataforma": "twitter", "url": "https://twitter.com/mateo" },
+    { "id": 2, "usuario_id": 2, "plataforma": "linkedin", "url": "https://linkedin.com/in/ana" },
+    { "id": 3, "usuario_id": 3, "plataforma": "facebook", "url": "https://facebook.com/carlos" }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "comentarios": [
+    { "id": 1, "innovacion_id": 1, "usuario_id": 2, "mensaje": "Excelente idea, mucha suerte", "fecha": "2026-09-01" },
+    { "id": 2, "innovacion_id": 2, "usuario_id": 1, "mensaje": "¿Cuando estará disponible?", "fecha": "2026-09-02" },
+    { "id": 3, "innovacion_id": 3, "usuario_id": 3, "mensaje": "Me interesa apoyar este proyecto", "fecha": "2026-09-03" }
+  ]
+}

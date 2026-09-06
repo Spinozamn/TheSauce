@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carritos>
+    <carrito><id>1</id><usuario_id>1</usuario_id><estado>activo</estado><fecha_creacion>2026-09-01</fecha_creacion></carrito>
+    <carrito><id>2</id><usuario_id>2</usuario_id><estado>activo</estado><fecha_creacion>2026-09-02</fecha_creacion></carrito>
+    <carrito><id>3</id><usuario_id>3</usuario_id><estado>completado</estado><fecha_creacion>2026-08-28</fecha_creacion></carrito>
+</carritos>

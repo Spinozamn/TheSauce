@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<innovaciones>
+    <innovacion>
+        <id>1</id>
+        <titulo>Sistema de riego inteligente con IoT</titulo>
+        <descripcion>Dispositivo que optimiza el uso de agua en cultivos</descripcion>
+        <meta_financiera>75000.00</meta_financiera>
+        <estado>activo</estado>
+        <categoria>
+            <id>1</id>
+            <nombre>AgroTech</nombre>
+        </categoria>
+        <etiquetas>
+            <etiqueta>
+                <id>1</id>
+                <nombre>EcoTech</nombre>
+                <color>#10B981</color>
+            </etiqueta>
+            <etiqueta>
+                <id>2</id>
+                <nombre>IoT</nombre>
+                <color>#3B82F6</color>
+            </etiqueta>
+        </etiquetas>
+    </innovacion>
+    <innovacion>
+        <id>2</id>
+        <titulo>App de reciclaje local comunitario</titulo>
+        <descripcion>Plataforma para conectar vecinos y centros de reciclaje</descripcion>
+        <meta_financiera>30000.00</meta_financiera>
+        <estado>activo</estado>
+        <categoria>
+            <id>2</id>
+            <nombre>Tecnologia</nombre>
+        </categoria>
+        <etiquetas>
+            <etiqueta>
+                <id>1</id>
+                <nombre>EcoTech</nombre>
+                <color>#10B981</color>
+            </etiqueta>
+            <etiqueta>
+                <id>3</id>
+                <nombre>Comunidad</nombre>
+                <color>#F59E0B</color>
+            </etiqueta>
+        </etiquetas>
+    </innovacion>
+    <innovacion>
+        <id>3</id>
+        <titulo>Dron para entrega de medicamentos</titulo>
+        <descripcion>Dron autonomo para zonas rurales de dificil acceso</descripcion>
+        <meta_financiera>120000.00</meta_financiera>
+        <estado>activo</estado>
+        <categoria>
+            <id>3</id>
+            <nombre>Salud</nombre>
+        </categoria>
+        <etiquetas>
+            <etiqueta>
+                <id>4</id>
+                <nombre>Salud</nombre>
+                <color>#EF4444</color>
+            </etiqueta>
+            <etiqueta>
+                <id>2</id>
+                <nombre>IoT</nombre>
+                <color>#3B82F6</color>
+            </etiqueta>
+        </etiquetas>
+    </innovacion>
+</innovaciones>

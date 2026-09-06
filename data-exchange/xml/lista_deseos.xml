@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lista_deseos>
+    <lista_deseo><id>1</id><usuario_id>1</usuario_id><innovacion_id>3</innovacion_id><fecha_agregado>2026-09-01</fecha_agregado></lista_deseo>
+    <lista_deseo><id>2</id><usuario_id>2</usuario_id><innovacion_id>1</innovacion_id><fecha_agregado>2026-09-02</fecha_agregado></lista_deseo>
+    <lista_deseo><id>3</id><usuario_id>3</usuario_id><innovacion_id>2</innovacion_id><fecha_agregado>2026-09-03</fecha_agregado></lista_deseo>
+</lista_deseos>

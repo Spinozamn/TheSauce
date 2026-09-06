@@ -1,0 +1,37 @@
+{
+  "innovaciones": [
+    {
+      "id": 1,
+      "titulo": "Sistema de riego inteligente con IoT",
+      "descripcion": "Dispositivo que optimiza el uso de agua",
+      "meta_financiera": 75000.00,
+      "categoria": { "id": 1, "nombre": "AgroTech" },
+      "etiquetas": [
+        { "id": 1, "nombre": "EcoTech", "color": "#10B981" },
+        { "id": 2, "nombre": "IoT", "color": "#3B82F6" }
+      ]
+    },
+    {
+      "id": 2,
+      "titulo": "App de reciclaje local comunitario",
+      "descripcion": "Plataforma para conectar vecinos",
+      "meta_financiera": 30000.00,
+      "categoria": { "id": 2, "nombre": "Tecnología" },
+      "etiquetas": [
+        { "id": 1, "nombre": "EcoTech", "color": "#10B981" },
+        { "id": 3, "nombre": "Comunidad", "color": "#F59E0B" }
+      ]
+    },
+    {
+      "id": 3,
+      "titulo": "Dron para entrega de medicamentos",
+      "descripcion": "Dron autónomo para zonas rurales",
+      "meta_financiera": 120000.00,
+      "categoria": { "id": 3, "nombre": "Salud" },
+      "etiquetas": [
+        { "id": 4, "nombre": "Salud", "color": "#EF4444" },
+        { "id": 2, "nombre": "IoT", "color": "#3B82F6" }
+      ]
+    }
+  ]
+}

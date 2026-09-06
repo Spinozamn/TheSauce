@@ -1,0 +1,7 @@
+{
+  "categorias": [
+    { "id": 1, "nombre": "AgroTech", "descripcion": "Tecnologia aplicada al campo" },
+    { "id": 2, "nombre": "Salud", "descripcion": "Innovaciones medicas y de bienestar" },
+    { "id": 3, "nombre": "Educacion", "descripcion": "Herramientas para el aprendizaje" }
+  ]
+}

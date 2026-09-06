@@ -1,0 +1,7 @@
+{
+  "carritos": [
+    { "id": 1, "usuario_id": 1, "estado": "activo", "fecha_creacion": "2026-09-01" },
+    { "id": 2, "usuario_id": 2, "estado": "activo", "fecha_creacion": "2026-09-02" },
+    { "id": 3, "usuario_id": 3, "estado": "completado", "fecha_creacion": "2026-08-28" }
+  ]
+}
