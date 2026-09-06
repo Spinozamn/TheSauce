@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comentarios>
+    <comentario><id>1</id><innovacion_id>1</innovacion_id><usuario_id>2</usuario_id><mensaje>Excelente idea, mucha suerte</mensaje><fecha>2026-09-01</fecha></comentario>
+    <comentario><id>2</id><innovacion_id>2</innovacion_id><usuario_id>1</usuario_id><mensaje>¿Cuando estara disponible?</mensaje><fecha>2026-09-02</fecha></comentario>
+    <comentario><id>3</id><innovacion_id>3</innovacion_id><usuario_id>3</usuario_id><mensaje>Me interesa apoyar este proyecto</mensaje><fecha>2026-09-03</fecha></comentario>
+</comentarios>

@@ -1,0 +1,7 @@
+{
+  "hitos_financieros": [
+    { "id": 1, "innovacion_id": 1, "monto_objetivo": 25000.00, "descripcion": "Prototipo inicial", "fecha_limite": "2026-10-01" },
+    { "id": 2, "innovacion_id": 1, "monto_objetivo": 50000.00, "descripcion": "Pruebas de campo", "fecha_limite": "2026-11-15" },
+    { "id": 3, "innovacion_id": 2, "monto_objetivo": 15000.00, "descripcion": "Desarrollo de la App", "fecha_limite": "2026-12-01" }
+  ]
+}

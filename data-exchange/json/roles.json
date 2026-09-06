@@ -1,0 +1,7 @@
+{
+  "roles": [
+    { "id": 1, "nombre": "cliente", "descripcion": "Usuario que apoya proyectos" },
+    { "id": 2, "nombre": "creador", "descripcion": "Usuario que publica innovaciones" },
+    { "id": 3, "nombre": "administrador", "descripcion": "Gestiona la plataforma" }
+  ]
+}

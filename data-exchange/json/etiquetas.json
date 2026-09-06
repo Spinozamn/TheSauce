@@ -1,0 +1,30 @@
+{
+  "etiquetas": [
+    {
+      "id": 1,
+      "nombre": "EcoTech",
+      "color": "#10B981",
+      "innovaciones": [
+        { "id": 1, "titulo": "Sistema de riego inteligente con IoT" },
+        { "id": 2, "titulo": "App de reciclaje local comunitario" }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "IoT",
+      "color": "#3B82F6",
+      "innovaciones": [
+        { "id": 1, "titulo": "Sistema de riego inteligente con IoT" },
+        { "id": 3, "titulo": "Dron para entrega de medicamentos" }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Comunidad",
+      "color": "#F59E0B",
+      "innovaciones": [
+        { "id": 2, "titulo": "App de reciclaje local comunitario" }
+      ]
+    }
+  ]
+}

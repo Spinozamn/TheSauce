@@ -1,0 +1,7 @@
+{
+  "notificaciones": [
+    { "id": 1, "usuario_id": 1, "mensaje": "Tu contribucion fue aprobada", "leido": true },
+    { "id": 2, "usuario_id": 2, "mensaje": "Nueva contribucion a tu proyecto", "leido": false },
+    { "id": 3, "usuario_id": 3, "mensaje": "Bienvenido a TheSauce", "leido": true }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "etiqueta_innovacion": [
+    { "id": 1, "etiqueta_id": 1, "innovacion_id": 1 },
+    { "id": 2, "etiqueta_id": 2, "innovacion_id": 1 },
+    { "id": 3, "etiqueta_id": 1, "innovacion_id": 2 }
+  ]
+}

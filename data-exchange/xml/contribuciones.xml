@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contribuciones>
+    <contribucion><id>1</id><usuario_id>1</usuario_id><innovacion_id>1</innovacion_id><monto>1500.00</monto><estado>aprobada</estado></contribucion>
+    <contribucion><id>2</id><usuario_id>3</usuario_id><innovacion_id>2</innovacion_id><monto>500.00</monto><estado>pendiente</estado></contribucion>
+    <contribucion><id>3</id><usuario_id>1</usuario_id><innovacion_id>3</innovacion_id><monto>3000.00</monto><estado>aprobada</estado></contribucion>
+</contribuciones>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notificaciones>
+    <notificacion><id>1</id><usuario_id>1</usuario_id><mensaje>Tu contribucion fue aprobada</mensaje><leido>true</leido></notificacion>
+    <notificacion><id>2</id><usuario_id>2</usuario_id><mensaje>Nueva contribucion a tu proyecto</mensaje><leido>false</leido></notificacion>
+    <notificacion><id>3</id><usuario_id>3</usuario_id><mensaje>Bienvenido a TheSauce</mensaje><leido>true</leido></notificacion>
+</notificaciones>

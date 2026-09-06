@@ -1,0 +1,7 @@
+{
+  "logs_sistema": [
+    { "id": 1, "usuario_id": 1, "accion": "inicio_sesion", "fecha": "2026-09-03 10:00:00" },
+    { "id": 2, "usuario_id": 2, "accion": "creacion_innovacion", "fecha": "2026-09-03 11:30:00" },
+    { "id": 3, "usuario_id": 3, "accion": "contribucion_realizada", "fecha": "2026-09-03 14:15:00" }
+  ]
+}

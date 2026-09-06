@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logs_sistema>
+    <log_sistema><id>1</id><usuario_id>1</usuario_id><accion>inicio_sesion</accion><fecha>2026-09-03 10:00:00</fecha></log_sistema>
+    <log_sistema><id>2</id><usuario_id>2</usuario_id><accion>creacion_innovacion</accion><fecha>2026-09-03 11:30:00</fecha></log_sistema>
+    <log_sistema><id>3</id><usuario_id>3</usuario_id><accion>contribucion_realizada</accion><fecha>2026-09-03 14:15:00</fecha></log_sistema>
+</logs_sistema>

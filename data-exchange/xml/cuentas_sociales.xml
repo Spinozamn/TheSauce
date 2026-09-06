@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cuentas_sociales>
+    <cuenta_social><id>1</id><usuario_id>1</usuario_id><plataforma>twitter</plataforma><url>https://twitter.com/mateo</url></cuenta_social>
+    <cuenta_social><id>2</id><usuario_id>2</usuario_id><plataforma>linkedin</plataforma><url>https://linkedin.com/in/ana</url></cuenta_social>
+    <cuenta_social><id>3</id><usuario_id>3</usuario_id><plataforma>facebook</plataforma><url>https://facebook.com/carlos</url></cuenta_social>
+</cuentas_sociales>

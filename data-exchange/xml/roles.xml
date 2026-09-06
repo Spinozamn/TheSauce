@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles>
+    <rol><id>1</id><nombre>cliente</nombre><descripcion>Usuario que apoya proyectos</descripcion></rol>
+    <rol><id>2</id><nombre>creador</nombre><descripcion>Usuario que publica innovaciones</descripcion></rol>
+    <rol><id>3</id><nombre>administrador</nombre><descripcion>Gestiona la plataforma</descripcion></rol>
+</roles>

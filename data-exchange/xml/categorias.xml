@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categorias>
+    <categoria><id>1</id><nombre>AgroTech</nombre><descripcion>Tecnologia aplicada al campo</descripcion></categoria>
+    <categoria><id>2</id><nombre>Salud</nombre><descripcion>Innovaciones medicas y de bienestar</descripcion></categoria>
+    <categoria><id>3</id><nombre>Educacion</nombre><descripcion>Herramientas para el aprendizaje</descripcion></categoria>
+</categorias>

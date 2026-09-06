@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hitos_financieros>
+    <hito_financiero><id>1</id><innovacion_id>1</innovacion_id><monto_objetivo>25000.00</monto_objetivo><descripcion>Prototipo inicial</descripcion><fecha_limite>2026-10-01</fecha_limite></hito_financiero>
+    <hito_financiero><id>2</id><innovacion_id>1</innovacion_id><monto_objetivo>50000.00</monto_objetivo><descripcion>Pruebas de campo</descripcion><fecha_limite>2026-11-15</fecha_limite></hito_financiero>
+    <hito_financiero><id>3</id><innovacion_id>2</innovacion_id><monto_objetivo>15000.00</monto_objetivo><descripcion>Desarrollo de la App</descripcion><fecha_limite>2026-12-01</fecha_limite></hito_financiero>
+</hitos_financieros>

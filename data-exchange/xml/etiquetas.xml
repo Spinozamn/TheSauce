@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etiquetas>
+    <etiqueta>
+        <id>1</id>
+        <nombre>EcoTech</nombre>
+        <color>#10B981</color>
+        <innovaciones>
+            <innovacion>
+                <id>1</id>
+                <titulo>Sistema de riego inteligente con IoT</titulo>
+            </innovacion>
+            <innovacion>
+                <id>2</id>
+                <titulo>App de reciclaje local comunitario</titulo>
+            </innovacion>
+        </innovaciones>
+    </etiqueta>
+    <etiqueta>
+        <id>2</id>
+        <nombre>IoT</nombre>
+        <color>#3B82F6</color>
+        <innovaciones>
+            <innovacion>
+                <id>1</id>
+                <titulo>Sistema de riego inteligente con IoT</titulo>
+            </innovacion>
+            <innovacion>
+                <id>3</id>
+                <titulo>Dron para entrega de medicamentos</titulo>
+            </innovacion>
+        </innovaciones>
+    </etiqueta>
+    <etiqueta>
+        <id>3</id>
+        <nombre>Comunidad</nombre>
+        <color>#F59E0B</color>
+        <innovaciones>
+            <innovacion>
+                <id>2</id>
+                <titulo>App de reciclaje local comunitario</titulo>
+            </innovacion>
+        </innovaciones>
+    </etiqueta>
+</etiquetas>
