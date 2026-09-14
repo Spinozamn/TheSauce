@@ -12,7 +12,7 @@ class CategoriaController extends Controller
     {
         $categorias = Categoria::withCount('innovaciones')->orderBy('id')->paginate(10);
 
-        return Inertia::render('Categorias/Index', [
+        return Inertia::render('admin/categorias/index', [
             'categorias' => $categorias,
         ]);
     }

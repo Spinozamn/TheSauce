@@ -12,7 +12,7 @@ class LogSistemaController extends Controller
     {
         $logsSistema = LogSistema::with('usuario')->orderBy('id')->paginate(10);
 
-        return Inertia::render('LogsSistema/Index', [
+        return Inertia::render('admin/logs-sistema/index', [
             'logsSistema' => $logsSistema,
         ]);
     }

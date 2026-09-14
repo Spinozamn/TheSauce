@@ -12,7 +12,7 @@ class InnovacionController extends Controller
     {
         $innovaciones = Innovacion::with(['usuario', 'categoria', 'etiquetas'])->orderBy('id')->paginate(10);
 
-        return Inertia::render('Innovaciones/Index', [
+        return Inertia::render('admin/innovaciones/index', [
             'innovaciones' => $innovaciones,
         ]);
     }

@@ -12,7 +12,7 @@ class UsuarioController extends Controller
     {
         $usuarios = Usuario::with('rol')->orderBy('id')->paginate(10);
 
-        return Inertia::render('Usuarios/Index', [
+        return Inertia::render('admin/usuarios/index', [
             'usuarios' => $usuarios,
         ]);
     }

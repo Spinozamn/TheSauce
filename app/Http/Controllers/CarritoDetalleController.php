@@ -12,7 +12,7 @@ class CarritoDetalleController extends Controller
     {
         $carritoDetalles = CarritoDetalle::with(['carrito.usuario', 'innovacion'])->orderBy('id')->paginate(10);
 
-        return Inertia::render('CarritoDetalles/Index', [
+        return Inertia::render('admin/carrito-detalles/index', [
             'carritoDetalles' => $carritoDetalles,
         ]);
     }

@@ -12,7 +12,7 @@ class EtiquetaController extends Controller
     {
         $etiquetas = Etiqueta::withCount('innovaciones')->orderBy('id')->paginate(10);
 
-        return Inertia::render('Etiquetas/Index', [
+        return Inertia::render('admin/etiquetas/index', [
             'etiquetas' => $etiquetas,
         ]);
     }

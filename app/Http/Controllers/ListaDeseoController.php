@@ -12,7 +12,7 @@ class ListaDeseoController extends Controller
     {
         $listaDeseos = ListaDeseo::with(['usuario', 'innovacion'])->orderBy('id')->paginate(10);
 
-        return Inertia::render('ListaDeseos/Index', [
+        return Inertia::render('admin/lista-deseos/index', [
             'listaDeseos' => $listaDeseos,
         ]);
     }

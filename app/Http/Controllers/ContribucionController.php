@@ -12,7 +12,7 @@ class ContribucionController extends Controller
     {
         $contribuciones = Contribucion::with(['usuario', 'innovacion'])->orderBy('id')->paginate(10);
 
-        return Inertia::render('Contribuciones/Index', [
+        return Inertia::render('admin/contribuciones/index', [
             'contribuciones' => $contribuciones,
         ]);
     }
