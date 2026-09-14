@@ -12,7 +12,7 @@ class NotificacionController extends Controller
     {
         $notificaciones = Notificacion::with('usuario')->orderBy('id')->paginate(10);
 
-        return Inertia::render('Notificaciones/Index', [
+        return Inertia::render('admin/notificaciones/index', [
             'notificaciones' => $notificaciones,
         ]);
     }

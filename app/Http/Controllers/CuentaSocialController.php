@@ -12,7 +12,7 @@ class CuentaSocialController extends Controller
     {
         $cuentasSociales = CuentaSocial::with('usuario')->orderBy('id')->paginate(10);
 
-        return Inertia::render('CuentasSociales/Index', [
+        return Inertia::render('admin/cuentas-sociales/index', [
             'cuentasSociales' => $cuentasSociales,
         ]);
     }

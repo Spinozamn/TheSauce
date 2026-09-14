@@ -12,7 +12,7 @@ class ComentarioController extends Controller
     {
         $comentarios = Comentario::with(['usuario', 'innovacion', 'padre'])->orderBy('id')->paginate(10);
 
-        return Inertia::render('Comentarios/Index', [
+        return Inertia::render('admin/comentarios/index', [
             'comentarios' => $comentarios,
         ]);
     }

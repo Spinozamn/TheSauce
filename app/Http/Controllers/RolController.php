@@ -10,7 +10,7 @@ class RolController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Roles/Index', [
+        return Inertia::render('admin/roles/index', [
             'roles' => Rol::orderBy('id')->paginate(10),
         ]);
     }

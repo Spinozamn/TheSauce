@@ -18,26 +18,9 @@ use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia; 
+use Inertia\Inertia;
 
 Route::inertia('/', 'welcome')->name('home');
-
-Route::inertia('panel', 'Panel/Index')->name('panel');
-
-Route::resource('roles', RolController::class)->only(['index']);
-Route::resource('usuarios', UsuarioController::class)->only(['index']);
-Route::resource('cuentas-sociales', CuentaSocialController::class)->only(['index']);
-Route::resource('categorias', CategoriaController::class)->only(['index']);
-Route::resource('etiquetas', EtiquetaController::class)->only(['index']);
-Route::resource('innovaciones', InnovacionController::class)->only(['index']);
-Route::resource('hitos-financieros', HitoFinancieroController::class)->only(['index']);
-Route::resource('lista-deseos', ListaDeseoController::class)->only(['index']);
-Route::resource('carritos', CarritoController::class)->only(['index']);
-Route::resource('carrito-detalles', CarritoDetalleController::class)->only(['index']);
-Route::resource('contribuciones', ContribucionController::class)->only(['index']);
-Route::resource('comentarios', ComentarioController::class)->only(['index']);
-Route::resource('notificaciones', NotificacionController::class)->only(['index']);
-Route::resource('logs-sistema', LogSistemaController::class)->only(['index']);
 
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
@@ -57,9 +40,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('admin/dashboard');
     })->name('admin.dashboard');
 
-    Route::get('/admin/innovaciones', function () {
-        return Inertia::render('admin/innovaciones/index');
-    })->name('admin.innovaciones.index');
+    Route::get('/admin/roles', [RolController::class, 'index'])->name('admin.roles.index');
+    Route::get('/admin/usuarios', [UsuarioController::class, 'index'])->name('admin.usuarios.index');
+    Route::get('/admin/cuentas-sociales', [CuentaSocialController::class, 'index'])->name('admin.cuentas-sociales.index');
+    Route::get('/admin/categorias', [CategoriaController::class, 'index'])->name('admin.categorias.index');
+    Route::get('/admin/etiquetas', [EtiquetaController::class, 'index'])->name('admin.etiquetas.index');
+    Route::get('/admin/innovaciones', [InnovacionController::class, 'index'])->name('admin.innovaciones.index');
+    Route::get('/admin/hitos-financieros', [HitoFinancieroController::class, 'index'])->name('admin.hitos-financieros.index');
+    Route::get('/admin/lista-deseos', [ListaDeseoController::class, 'index'])->name('admin.lista-deseos.index');
+    Route::get('/admin/carritos', [CarritoController::class, 'index'])->name('admin.carritos.index');
+    Route::get('/admin/carrito-detalles', [CarritoDetalleController::class, 'index'])->name('admin.carrito-detalles.index');
+    Route::get('/admin/contribuciones', [ContribucionController::class, 'index'])->name('admin.contribuciones.index');
+    Route::get('/admin/comentarios', [ComentarioController::class, 'index'])->name('admin.comentarios.index');
+    Route::get('/admin/notificaciones', [NotificacionController::class, 'index'])->name('admin.notificaciones.index');
+    Route::get('/admin/logs-sistema', [LogSistemaController::class, 'index'])->name('admin.logs-sistema.index');
 
     Route::get('/admin/innovaciones/crear', function () {
         return Inertia::render('admin/innovaciones/create');
