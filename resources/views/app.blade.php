@@ -37,7 +37,7 @@
         @fonts
 
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+        @vite(['resources/css/app.css', 'resources/js/app.tsx', 'resources/js/pages/'.$page['component'].'.'.(file_exists(resource_path('js/pages/'.$page['component'].'.tsx')) ? 'tsx' : 'jsx')])
         <x-inertia::head>
             <title>{{ config('app.name', 'Laravel') }}</title>
         </x-inertia::head>
