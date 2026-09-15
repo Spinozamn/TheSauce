@@ -5,30 +5,33 @@ namespace Database\Factories;
 use App\Models\Rol;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<Rol>
- */
 class RolFactory extends Factory
 {
+    protected $model = Rol::class;
+
+    private static array $nombres = [
+        'Administrador', 'Moderador', 'Creador', 'Cliente', 'Editor',
+        'Analista', 'Soporte', 'Finanzas', 'Marketing', 'Invitado',
+        'VIP', 'Básico', 'Premium', 'Gold', 'Silver', 'Bronze',
+        'Consultor', 'Auditor', 'Supervisor', 'Operador',
+    ];
+
+    private static int $contador = 0;
+
     public function definition(): array
     {
+        $indice = self::$contador % count(self::$nombres);
+        $nombre = self::$nombres[$indice];
+        
+        // Si el contador supera el tamaño del array, agregar sufijo numérico
+        if (self::$contador >= count(self::$nombres)) {
+            $nombre .= ' ' . (intdiv(self::$contador, count(self::$nombres)) + 1);
+        }
+        
+        self::$contador++;
+
         return [
-            'nombre' => fake()->unique()->randomElement([
-                'Administrador',
-                'Moderador',
-                'Creador de Contenido',
-                'Inversionista',
-                'Patrocinador',
-                'Revisor',
-                'Editor',
-                'Analista',
-                'Soporte Técnico',
-                'Community Manager',
-                'Mentor',
-                'Evaluador',
-                'Promotor',
-                'Observador',
-            ]),
+            'nombre' => $nombre,
             'descripcion' => fake()->sentence(),
         ];
     }

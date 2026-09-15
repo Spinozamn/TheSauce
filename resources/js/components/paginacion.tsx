@@ -6,7 +6,19 @@ interface PaginacionProps {
 }
 
 export default function Paginacion({ paginador }: PaginacionProps) {
-    const paginas = paginador.links.filter((enlace) => enlace.page !== null);
+    const paginas = Array.from(
+        new Map(
+            paginador.links
+                .filter(
+                    (enlace): enlace is EnlacePagina & { page: number } =>
+                        enlace.page !== null &&
+                        Number.isInteger(enlace.page) &&
+                        enlace.page >= 1 &&
+                        enlace.page <= paginador.last_page,
+                )
+                .map((enlace) => [enlace.page, enlace]),
+        ).values(),
+    );
 
     return (
         <div className="flex flex-col items-center justify-between gap-4 border-t border-gray-100 bg-gray-50/50 px-6 py-4 sm:flex-row">

@@ -48,8 +48,9 @@ export default function NotificacionesIndex({
                                         #{notificacion.id}
                                     </td>
                                     <td className="p-4 font-medium text-gray-900">
-                                        {notificacion.usuario.nombre}{' '}
-                                        {notificacion.usuario.apellido_paterno}
+                                        {notificacion.usuario
+                                            ? `${notificacion.usuario.nombre} ${notificacion.usuario.apellido_paterno}`
+                                            : 'Sistema'}
                                     </td>
                                     <td className="p-4 text-gray-600">
                                         {notificacion.titulo}

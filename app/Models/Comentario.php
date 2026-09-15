@@ -2,55 +2,29 @@
 
 namespace App\Models;
 
-use Database\Factories\ComentarioFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Comentario extends Model
 {
-    /** @use HasFactory<ComentarioFactory> */
     use HasFactory;
 
-    protected $fillable = [
-        'usuario_id',
-        'innovacion_id',
-        'comentario_padre_id',
-        'contenido',
-        'es_respuesta',
-        'fecha_comentario',
-    ];
+    protected $table = 'comentarios';
 
-    /**
-     * @return BelongsTo<Usuario, $this>
-     */
-    public function usuario(): BelongsTo
+    protected $fillable = ['usuario_id', 'innovacion_id', 'comentario_padre_id', 'contenido', 'es_respuesta'];
+
+    public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Usuario::class);
     }
 
-    /**
-     * @return BelongsTo<Innovacion, $this>
-     */
-    public function innovacion(): BelongsTo
+    public function innovacion()
     {
-        return $this->belongsTo(Innovacion::class, 'innovacion_id');
+        return $this->belongsTo(Innovacion::class);
     }
 
-    /**
-     * @return BelongsTo<Comentario, $this>
-     */
-    public function padre(): BelongsTo
+    public function comentarioPadre()
     {
         return $this->belongsTo(Comentario::class, 'comentario_padre_id');
-    }
-
-    /**
-     * @return HasMany<Comentario, $this>
-     */
-    public function respuestas(): HasMany
-    {
-        return $this->hasMany(Comentario::class, 'comentario_padre_id');
     }
 }

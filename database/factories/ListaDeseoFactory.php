@@ -1,17 +1,13 @@
 <?php
-
 namespace Database\Factories;
-
-use App\Models\Innovacion;
 use App\Models\ListaDeseo;
 use App\Models\Usuario;
+use App\Models\Innovacion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<ListaDeseo>
- */
 class ListaDeseoFactory extends Factory
 {
+    protected $model = ListaDeseo::class;
     public function definition(): array
     {
         return [
