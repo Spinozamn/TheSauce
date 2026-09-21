@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Innovacion extends Model
 {
-    /** @use HasFactory<InnovacionFactory> */
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'innovaciones';
 
@@ -36,65 +36,41 @@ class Innovacion extends Model
         'fecha_fin' => 'date',
     ];
 
-    /**
-     * @return BelongsTo<Usuario, $this>
-     */
     public function usuario(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
-    /**
-     * @return BelongsTo<Categoria, $this>
-     */
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
-    /**
-     * @return BelongsToMany<Etiqueta, $this>
-     */
     public function etiquetas(): BelongsToMany
     {
         return $this->belongsToMany(Etiqueta::class, 'etiqueta_innovacion', 'innovacion_id', 'etiqueta_id');
     }
 
-    /**
-     * @return HasMany<HitoFinanciero, $this>
-     */
     public function hitosFinancieros(): HasMany
     {
         return $this->hasMany(HitoFinanciero::class, 'innovacion_id');
     }
 
-    /**
-     * @return HasMany<ListaDeseo, $this>
-     */
     public function listaDeseos(): HasMany
     {
         return $this->hasMany(ListaDeseo::class, 'innovacion_id');
     }
 
-    /**
-     * @return HasMany<CarritoDetalle, $this>
-     */
     public function carritoDetalles(): HasMany
     {
         return $this->hasMany(CarritoDetalle::class, 'innovacion_id');
     }
 
-    /**
-     * @return HasMany<Contribucion, $this>
-     */
     public function contribuciones(): HasMany
     {
         return $this->hasMany(Contribucion::class, 'innovacion_id');
     }
 
-    /**
-     * @return HasMany<Comentario, $this>
-     */
     public function comentarios(): HasMany
     {
         return $this->hasMany(Comentario::class, 'innovacion_id');

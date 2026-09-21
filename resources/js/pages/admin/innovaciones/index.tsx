@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import AdminLayout from '@/layouts/admin-layout';
 import Paginacion from '@/components/paginacion';
 import { formatoMoneda } from '@/lib/formato';
@@ -18,19 +18,38 @@ const coloresEstado: Record<string, string> = {
 export default function InnovacionesIndex({
     innovaciones,
 }: InnovacionesIndexProps) {
+    const handleEliminar = (id: number, titulo: string) => {
+        if (confirm(`¿Deseas enviar la innovación #${id} "${titulo}" a la papelera?`)) {
+            router.delete(`/admin/innovaciones/${id}`);
+        }
+    };
+
     return (
         <AdminLayout>
             <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
                 <div className="flex items-center justify-between border-b border-gray-100 bg-gray-50/50 p-6">
-                    <h2 className="text-2xl font-bold text-gray-900">
-                        Listado de Innovaciones
-                    </h2>
-                    <Link
-                        href="/admin/innovaciones/crear"
-                        className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
-                    >
-                        + Nueva Innovación
-                    </Link>
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-900">
+                            Listado de Innovaciones
+                        </h2>
+                        <p className="text-sm text-gray-500 mt-1">
+                            Consulta, edición y administración de registros activos
+                        </p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <Link
+                            href="/admin/innovaciones/papelera"
+                            className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50"
+                        >
+                            Papelera
+                        </Link>
+                        <Link
+                            href="/admin/innovaciones/crear"
+                            className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
+                        >
+                            + Nueva Innovación
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="overflow-x-auto">
@@ -45,6 +64,7 @@ export default function InnovacionesIndex({
                                 <th className="p-4 font-semibold">Meta</th>
                                 <th className="p-4 font-semibold">Recaudado</th>
                                 <th className="p-4 font-semibold">Estado</th>
+                                <th className="p-4 font-semibold text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
@@ -102,6 +122,34 @@ export default function InnovacionesIndex({
                                         >
                                             {innovacion.estado}
                                         </span>
+                                    </td>
+                                    <td className="p-4 text-center">
+                                        <div className="flex items-center justify-center gap-1.5">
+                                            <Link
+                                                href={`/admin/innovaciones/${innovacion.id}`}
+                                                className="rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-blue-600"
+                                            >
+                                                Ver
+                                            </Link>
+                                            <Link
+                                                href={`/admin/innovaciones/${innovacion.id}/edit`}
+                                                className="rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-indigo-600"
+                                            >
+                                                Editar
+                                            </Link>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleEliminar(
+                                                        innovacion.id,
+                                                        innovacion.titulo,
+                                                    )
+                                                }
+                                                className="rounded-md border border-red-200 bg-white px-2.5 py-1.5 text-xs font-medium text-red-600 shadow-sm transition-colors hover:bg-red-50 hover:border-red-300"
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
