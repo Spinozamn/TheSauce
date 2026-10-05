@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Factories;
+
 use App\Models\CuentaSocial;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -7,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class CuentaSocialFactory extends Factory
 {
     protected $model = CuentaSocial::class;
+
     public function definition(): array
     {
         return [

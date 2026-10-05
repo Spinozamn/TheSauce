@@ -1,13 +1,16 @@
 <?php
+
 namespace Database\Factories;
-use App\Models\CarritoDetalle;
+
 use App\Models\Carrito;
+use App\Models\CarritoDetalle;
 use App\Models\Innovacion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CarritoDetalleFactory extends Factory
 {
     protected $model = CarritoDetalle::class;
+
     public function definition(): array
     {
         return [

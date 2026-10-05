@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Factories;
+
 use App\Models\HitoFinanciero;
 use App\Models\Innovacion;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -7,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class HitoFinancieroFactory extends Factory
 {
     protected $model = HitoFinanciero::class;
+
     public function definition(): array
     {
         return [

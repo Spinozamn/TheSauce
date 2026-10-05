@@ -13,9 +13,9 @@ class HitoFinancieroController extends Controller
         $hitos = HitoFinanciero::with('innovacion')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        
+
         return Inertia::render('admin/hitos-financieros/Index', [
-            'hitos' => $hitos
+            'hitos' => $hitos,
         ]);
     }
 }

@@ -1,16 +1,20 @@
 <?php
+
 namespace Database\Factories;
+
+use App\Models\Categoria;
 use App\Models\Innovacion;
 use App\Models\Usuario;
-use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InnovacionFactory extends Factory
 {
     protected $model = Innovacion::class;
+
     public function definition(): array
     {
         $meta = fake()->randomFloat(2, 10000, 500000);
+
         return [
             'usuario_id' => Usuario::factory(),
             'categoria_id' => Categoria::factory(),

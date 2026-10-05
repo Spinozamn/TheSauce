@@ -11,9 +11,9 @@ class EtiquetaController extends Controller
     public function index()
     {
         $etiquetas = Etiqueta::orderBy('id', 'desc')->paginate(10);
-        
+
         return Inertia::render('admin/etiquetas/Index', [
-            'etiquetas' => $etiquetas
+            'etiquetas' => $etiquetas,
         ]);
     }
 }

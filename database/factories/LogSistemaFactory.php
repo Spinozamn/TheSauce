@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Factories;
+
 use App\Models\LogSistema;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -7,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class LogSistemaFactory extends Factory
 {
     protected $model = LogSistema::class;
+
     public function definition(): array
     {
         return [

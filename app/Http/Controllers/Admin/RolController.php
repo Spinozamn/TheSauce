@@ -11,9 +11,9 @@ class RolController extends Controller
     public function index()
     {
         $roles = Rol::orderBy('id', 'desc')->paginate(10);
-        
+
         return Inertia::render('admin/roles/Index', [
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 }

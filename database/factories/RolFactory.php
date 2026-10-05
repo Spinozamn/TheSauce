@@ -22,12 +22,12 @@ class RolFactory extends Factory
     {
         $indice = self::$contador % count(self::$nombres);
         $nombre = self::$nombres[$indice];
-        
+
         // Si el contador supera el tamaño del array, agregar sufijo numérico
         if (self::$contador >= count(self::$nombres)) {
-            $nombre .= ' ' . (intdiv(self::$contador, count(self::$nombres)) + 1);
+            $nombre .= ' '.(intdiv(self::$contador, count(self::$nombres)) + 1);
         }
-        
+
         self::$contador++;
 
         return [

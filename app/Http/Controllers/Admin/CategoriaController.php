@@ -11,9 +11,9 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::orderBy('id', 'desc')->paginate(10);
-        
+
         return Inertia::render('admin/categorias/Index', [
-            'categorias' => $categorias
+            'categorias' => $categorias,
         ]);
     }
 }

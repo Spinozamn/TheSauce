@@ -11,7 +11,13 @@ class Comentario extends Model
 
     protected $table = 'comentarios';
 
-    protected $fillable = ['usuario_id', 'innovacion_id', 'comentario_padre_id', 'contenido', 'es_respuesta'];
+    protected $fillable = [
+        'usuario_id',
+        'innovacion_id',
+        'comentario_padre_id',
+        'contenido',
+        'es_respuesta',
+    ];
 
     public function usuario()
     {
@@ -23,8 +29,18 @@ class Comentario extends Model
         return $this->belongsTo(Innovacion::class);
     }
 
-    public function comentarioPadre()
+    public function padre()
     {
         return $this->belongsTo(Comentario::class, 'comentario_padre_id');
+    }
+
+    public function comentarioPadre()
+    {
+        return $this->padre();
+    }
+
+    public function respuestas()
+    {
+        return $this->hasMany(Comentario::class, 'comentario_padre_id');
     }
 }
