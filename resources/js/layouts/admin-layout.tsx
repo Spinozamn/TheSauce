@@ -65,7 +65,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <>
             <Head title="Panel Administrativo - TheSauce" />
             <div className="flex min-h-screen bg-gray-50">
-                {/* Menú Lateral */}
                 <aside className="flex w-64 flex-col bg-slate-900 text-white shadow-xl">
                     <div className="border-b border-slate-700 p-6 text-2xl font-bold tracking-tight">
                         TheSauce <span className="text-blue-500">Admin</span>
@@ -87,7 +86,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                     </nav>
                     <div className="border-t border-slate-700 p-4">
                         <Link
-                            href="/logout"
+                            href="/admin/logout"
                             method="post"
                             as="button"
                             className="flex w-full items-center gap-3 text-left text-slate-400 transition-colors hover:text-white"
@@ -97,7 +96,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                     </div>
                 </aside>
 
-                {/* Área Principal */}
                 <main className="flex flex-1 flex-col">
                     <header className="flex items-center justify-between border-b border-gray-200 bg-white px-8 py-4 shadow-sm">
                         <h1 className="text-xl font-semibold text-gray-800">

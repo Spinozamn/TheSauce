@@ -29,13 +29,12 @@ export default function CreateInnovacion({ categorias }: Props) {
     const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-    // Validación de imagen en cliente (tipo y tamaño)
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-        const maxSizeBytes = 2 * 1024 * 1024; // 2MB
+        const maxSizeBytes = 2 * 1024 * 1024;
 
         if (!allowedTypes.includes(file.type)) {
             setClientErrors(prev => ({ ...prev, imagen: 'Solo se permiten imágenes JPG, PNG o WEBP.' }));
@@ -60,7 +59,6 @@ export default function CreateInnovacion({ categorias }: Props) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validaciones en interfaz antes del envío
         const errs: Record<string, string> = {};
 
         if (!data.titulo.trim() || data.titulo.length < 5) {
@@ -90,10 +88,9 @@ export default function CreateInnovacion({ categorias }: Props) {
         setClientErrors(errs);
 
         if (Object.keys(errs).length > 0) {
-            return; // Bloquea la petición si hay errores en el formulario
+            return;
         }
 
-        // Envío con multipart/form-data automático por Inertia
         post('/admin/innovaciones', {
             forceFormData: true,
         });
@@ -114,7 +111,6 @@ export default function CreateInnovacion({ categorias }: Props) {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Título */}
                     <div>
                         <Label htmlFor="titulo">Título del Proyecto *</Label>
                         <Input
@@ -128,7 +124,6 @@ export default function CreateInnovacion({ categorias }: Props) {
                         <InputError message={clientErrors.titulo || errors.titulo} />
                     </div>
 
-                    {/* Categoría */}
                     <div>
                         <Label htmlFor="categoria_id">Categoría *</Label>
                         <select
@@ -147,7 +142,6 @@ export default function CreateInnovacion({ categorias }: Props) {
                         <InputError message={clientErrors.categoria_id || errors.categoria_id} />
                     </div>
 
-                    {/* Descripción */}
                     <div>
                         <Label htmlFor="descripcion">Descripción detallada *</Label>
                         <textarea
@@ -161,7 +155,6 @@ export default function CreateInnovacion({ categorias }: Props) {
                         <InputError message={clientErrors.descripcion || errors.descripcion} />
                     </div>
 
-                    {/* Meta Financiera y Fechas */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <Label htmlFor="meta_financiera">Meta Financiera ($ MXN) *</Label>
@@ -202,7 +195,6 @@ export default function CreateInnovacion({ categorias }: Props) {
                         </div>
                     </div>
 
-                    {/* Carga de Imagen de Portada */}
                     <div>
                         <Label htmlFor="imagen">Imagen de Portada (JPG, PNG, WEBP - Máx 2MB) *</Label>
                         <Input
@@ -226,7 +218,6 @@ export default function CreateInnovacion({ categorias }: Props) {
                         )}
                     </div>
 
-                    {/* Botones de Acción */}
                     <div className="flex justify-end gap-3 pt-4 border-t">
                         <Button variant="outline" asChild>
                             <Link href="/admin/innovaciones">Cancelar</Link>

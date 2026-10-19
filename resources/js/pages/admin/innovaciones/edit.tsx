@@ -48,7 +48,6 @@ export default function Edit({ innovacion, categorias }: Props) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Se envía por POST con _method: 'put' para soporte nativo de multipart/form-data
         post(`/admin/innovaciones/${innovacion.id}`, {
             forceFormData: true,
         });
@@ -75,7 +74,6 @@ export default function Edit({ innovacion, categorias }: Props) {
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 space-y-6">
-                    {/* Título */}
                     <div>
                         <label className="block text-sm font-medium mb-1">Título de la Innovación</label>
                         <input
@@ -87,7 +85,6 @@ export default function Edit({ innovacion, categorias }: Props) {
                         {errors.titulo && <p className="text-red-500 text-xs mt-1">{errors.titulo}</p>}
                     </div>
 
-                    {/* Categoría y Estado */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium mb-1">Categoría</label>
@@ -122,7 +119,6 @@ export default function Edit({ innovacion, categorias }: Props) {
                         </div>
                     </div>
 
-                    {/* Meta Financiera y Fechas */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label className="block text-sm font-medium mb-1">Meta Financiera ($ MXN)</label>
@@ -159,7 +155,6 @@ export default function Edit({ innovacion, categorias }: Props) {
                         </div>
                     </div>
 
-                    {/* Descripción */}
                     <div>
                         <label className="block text-sm font-medium mb-1">Descripción</label>
                         <textarea
@@ -171,7 +166,6 @@ export default function Edit({ innovacion, categorias }: Props) {
                         {errors.descripcion && <p className="text-red-500 text-xs mt-1">{errors.descripcion}</p>}
                     </div>
 
-                    {/* Gestión de Imagen */}
                     <div className="border-t border-neutral-800 pt-4">
                         <label className="block text-sm font-medium mb-2">Imagen de Portada</label>
                         <div className="flex items-center gap-6">
@@ -195,7 +189,6 @@ export default function Edit({ innovacion, categorias }: Props) {
                         </div>
                     </div>
 
-                    {/* Botones de acción */}
                     <div className="flex items-center justify-end gap-4 pt-4 border-t border-neutral-800">
                         <Link
                             href="/admin/innovaciones"

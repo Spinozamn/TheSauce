@@ -16,6 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->redirectGuestsTo(function (Request $request) {
+            if ($request->is('admin*')) {
+                return route('admin.login');
+            }
+
+            return route('login');
+        });
+
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
         $middleware->web(append: [

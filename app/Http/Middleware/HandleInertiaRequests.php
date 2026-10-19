@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -35,7 +36,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $user = $request->user();
+        $user = $request->user() ?? Auth::guard('admin')->user();
 
         return [
             ...parent::share($request),
@@ -44,8 +45,8 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
-            'currentTeam' => fn () => $user?->currentTeam ? $user->toUserTeam($user->currentTeam) : null,
-            'teams' => fn () => $user?->toUserTeams(includeCurrent: true) ?? [],
+            'currentTeam' => fn () => (method_exists($user, 'toUserTeam') && $user?->currentTeam) ? $user->toUserTeam($user->currentTeam) : null,
+            'teams' => fn () => method_exists($user, 'toUserTeams') ? $user->toUserTeams(includeCurrent: true) : [],
         ];
     }
 }
