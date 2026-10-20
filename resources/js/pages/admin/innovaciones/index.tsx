@@ -1,4 +1,4 @@
-import { Link, router } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import AdminLayout from '@/layouts/admin-layout';
 import Paginacion from '@/components/paginacion';
 import { formatoMoneda } from '@/lib/formato';
@@ -18,6 +18,9 @@ const coloresEstado: Record<string, string> = {
 export default function InnovacionesIndex({
     innovaciones,
 }: InnovacionesIndexProps) {
+    const { auth } = usePage<{ auth: { user?: { nivel?: number } } }>().props;
+    const nivel = auth?.user?.nivel ?? 1;
+
     const handleEliminar = (id: number, titulo: string) => {
         if (confirm(`¿Deseas enviar la innovación #${id} "${titulo}" a la papelera?`)) {
             router.delete(`/admin/innovaciones/${id}`);
@@ -37,18 +40,22 @@ export default function InnovacionesIndex({
                         </p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Link
-                            href="/admin/innovaciones/papelera"
-                            className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50"
-                        >
-                            Papelera
-                        </Link>
-                        <Link
-                            href="/admin/innovaciones/crear"
-                            className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
-                        >
-                            + Nueva Innovación
-                        </Link>
+                        {nivel >= 3 && (
+                            <Link
+                                href="/admin/innovaciones/papelera"
+                                className="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50"
+                            >
+                                Papelera
+                            </Link>
+                        )}
+                        {nivel >= 2 && (
+                            <Link
+                                href="/admin/innovaciones/crear"
+                                className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
+                            >
+                                + Nueva Innovación
+                            </Link>
+                        )}
                     </div>
                 </div>
 
@@ -131,24 +138,28 @@ export default function InnovacionesIndex({
                                             >
                                                 Ver
                                             </Link>
-                                            <Link
-                                                href={`/admin/innovaciones/${innovacion.id}/edit`}
-                                                className="rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-indigo-600"
-                                            >
-                                                Editar
-                                            </Link>
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    handleEliminar(
-                                                        innovacion.id,
-                                                        innovacion.titulo,
-                                                    )
-                                                }
-                                                className="rounded-md border border-red-200 bg-white px-2.5 py-1.5 text-xs font-medium text-red-600 shadow-sm transition-colors hover:bg-red-50 hover:border-red-300"
-                                            >
-                                                Eliminar
-                                            </button>
+                                            {nivel >= 2 && (
+                                                <Link
+                                                    href={`/admin/innovaciones/${innovacion.id}/edit`}
+                                                    className="rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-indigo-600"
+                                                >
+                                                    Editar
+                                                </Link>
+                                            )}
+                                            {nivel >= 3 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        handleEliminar(
+                                                            innovacion.id,
+                                                            innovacion.titulo,
+                                                        )
+                                                    }
+                                                    className="rounded-md border border-red-200 bg-white px-2.5 py-1.5 text-xs font-medium text-red-600 shadow-sm transition-colors hover:bg-red-50 hover:border-red-300"
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            )}
                                         </div>
                                     </td>
                                 </tr>

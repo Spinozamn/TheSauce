@@ -9,6 +9,7 @@ use App\Models\Innovacion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,6 +18,8 @@ class InnovacionController extends Controller
 {
     public function index(): Response
     {
+        Gate::authorize('consultar');
+
         $innovaciones = Innovacion::with(['categoria', 'usuario', 'etiquetas'])
             ->orderBy('id', 'desc')
             ->paginate(10);
@@ -28,6 +31,8 @@ class InnovacionController extends Controller
 
     public function create(): Response
     {
+        Gate::authorize('crear');
+
         $categorias = Categoria::select('id', 'nombre')->orderBy('nombre')->get();
 
         return Inertia::render('admin/innovaciones/create', [
@@ -37,6 +42,8 @@ class InnovacionController extends Controller
 
     public function store(StoreInnovacionRequest $request): RedirectResponse
     {
+        Gate::authorize('crear');
+
         $validated = $request->validated();
 
         DB::transaction(function () use ($request, $validated) {
@@ -74,6 +81,8 @@ class InnovacionController extends Controller
 
     public function show(string|int $id): Response|RedirectResponse
     {
+        Gate::authorize('consultar');
+
         $innovacion = Innovacion::with([
             'categoria',
             'usuario',
@@ -97,6 +106,8 @@ class InnovacionController extends Controller
 
     public function edit(string|int $id): Response|RedirectResponse
     {
+        Gate::authorize('editar');
+
         $innovacion = Innovacion::find($id);
 
         if (!$innovacion) {
@@ -116,6 +127,8 @@ class InnovacionController extends Controller
 
     public function update(UpdateInnovacionRequest $request, string|int $id): RedirectResponse
     {
+        Gate::authorize('editar');
+
         $innovacion = Innovacion::find($id);
 
         if (!$innovacion) {
@@ -166,6 +179,8 @@ class InnovacionController extends Controller
 
     public function destroy(string|int $id): RedirectResponse
     {
+        Gate::authorize('eliminar');
+
         $innovacion = Innovacion::find($id);
 
         if (!$innovacion) {
@@ -185,6 +200,8 @@ class InnovacionController extends Controller
 
     public function trash(): Response
     {
+        Gate::authorize('eliminar');
+
         $innovaciones = Innovacion::onlyTrashed()
             ->with(['categoria', 'usuario', 'etiquetas'])
             ->orderBy('deleted_at', 'desc')
@@ -197,6 +214,8 @@ class InnovacionController extends Controller
 
     public function restore(string|int $id): RedirectResponse
     {
+        Gate::authorize('eliminar');
+
         $innovacion = Innovacion::onlyTrashed()->find($id);
 
         if (!$innovacion) {
@@ -216,6 +235,8 @@ class InnovacionController extends Controller
 
     public function forceDelete(string|int $id): RedirectResponse
     {
+        Gate::authorize('eliminar');
+
         $innovacion = Innovacion::onlyTrashed()->find($id);
 
         if (!$innovacion) {

@@ -17,6 +17,7 @@ class Administrador extends Authenticatable
         'email',
         'password',
         'activo',
+        'nivel',
     ];
 
     protected $hidden = [
@@ -29,6 +30,7 @@ class Administrador extends Authenticatable
         return [
             'password' => 'hashed',
             'activo'   => 'boolean',
+            'nivel'    => 'integer',
         ];
     }
 }
