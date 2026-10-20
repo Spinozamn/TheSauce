@@ -2,7 +2,8 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Models\User;
+use App\Models\Administrador;
+use Database\Seeders\AdministradorSeeder;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -13,14 +14,15 @@ class ListadosTest extends TestCase
 {
     use RefreshDatabase;
 
-    private User $administrador;
+    private Administrador $administrador;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-        $this->administrador = User::factory()->create();
+        $this->seed(AdministradorSeeder::class);
+        $this->administrador = Administrador::where('usuario', 'admin_general')->first();
     }
 
     public static function modulos(): array
@@ -46,7 +48,7 @@ class ListadosTest extends TestCase
     #[DataProvider('modulos')]
     public function test_se_muestra_el_listado_con_paginacion(string $ruta, string $componente, string $propiedad, int $total): void
     {
-        $this->actingAs($this->administrador)
+        $this->actingAs($this->administrador, 'admin')
             ->get($ruta)
             ->assertOk()
             ->assertInertia(fn (Assert $pagina) => $pagina
@@ -60,12 +62,12 @@ class ListadosTest extends TestCase
 
     public function test_los_invitados_son_redirigidos_al_inicio_de_sesion(): void
     {
-        $this->get('/admin/innovaciones')->assertRedirect(route('login'));
+        $this->get('/admin/innovaciones')->assertRedirect(route('admin.login'));
     }
 
     public function test_el_listado_de_innovaciones_muestra_las_relaciones(): void
     {
-        $this->actingAs($this->administrador)
+        $this->actingAs($this->administrador, 'admin')
             ->get('/admin/innovaciones')
             ->assertInertia(fn (Assert $pagina) => $pagina
                 ->where('innovaciones.data.0.usuario.nombre', fn (string $nombre) => filled($nombre))
@@ -94,7 +96,7 @@ class ListadosTest extends TestCase
         ];
 
         foreach ($aserciones as [$ruta, $propiedad]) {
-            $this->actingAs($this->administrador)
+            $this->actingAs($this->administrador, 'admin')
                 ->get($ruta)
                 ->assertOk()
                 ->assertInertia(fn (Assert $pagina) => $pagina
@@ -104,7 +106,7 @@ class ListadosTest extends TestCase
 
     public function test_la_paginacion_permite_navegar_entre_paginas(): void
     {
-        $this->actingAs($this->administrador)
+        $this->actingAs($this->administrador, 'admin')
             ->get('/admin/innovaciones?page=3')
             ->assertOk()
             ->assertInertia(fn (Assert $pagina) => $pagina
@@ -114,7 +116,7 @@ class ListadosTest extends TestCase
                 ->where('innovaciones.next_page_url', null)
                 ->where('innovaciones.prev_page_url', fn (?string $url) => filled($url)));
 
-        $this->actingAs($this->administrador)
+        $this->actingAs($this->administrador, 'admin')
             ->get('/admin/carritos?page=2')
             ->assertOk()
             ->assertInertia(fn (Assert $pagina) => $pagina

@@ -23,8 +23,10 @@
             @auth('admin')
                 <div class="flex items-center gap-4">
                     <span class="text-slate-300 text-sm">
-                        Administrador: <strong class="text-white">{{ Auth::guard('admin')->user()->nombre }}</strong>
-                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 ml-1"></span>
+                        {{ Auth::guard('admin')->user()->nombre }}
+                        <span class="ml-2 px-2.5 py-0.5 rounded-full text-xs font-semibold {{ Auth::guard('admin')->user()->nivel === 3 ? 'bg-purple-950 text-purple-300 border border-purple-800' : (Auth::guard('admin')->user()->nivel === 2 ? 'bg-blue-950 text-blue-300 border border-blue-800' : 'bg-slate-800 text-slate-300 border border-slate-700') }}">
+                            Nivel {{ Auth::guard('admin')->user()->nivel }}
+                        </span>
                     </span>
 
                     <form action="{{ route('admin.logout') }}" method="POST" class="inline">
@@ -38,7 +40,7 @@
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto py-10 px-4">
+    <main class="max-w-5xl mx-auto py-10 px-4">
         @session('success')
             <div class="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-800 text-emerald-300">
                 {{ $value }}
@@ -62,34 +64,134 @@
         @endguest
 
         @auth('admin')
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl space-y-8">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-5">
                     <div>
-                        <h2 class="text-2xl font-bold text-white">Panel de Control Administrativo</h2>
-                        <p class="text-slate-400 text-sm mt-1">Sesión autenticada mediante el guardia <code class="text-blue-400">admin</code></p>
+                        <h2 class="text-2xl font-bold text-white">Panel de Control por Niveles</h2>
+                        <p class="text-slate-400 text-sm mt-1">
+                            Sesión activa como <strong class="text-slate-200">{{ Auth::guard('admin')->user()->usuario }}</strong>
+                        </p>
                     </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950 text-emerald-300 border border-emerald-800">
-                        Cuenta Activa
-                    </span>
+                    <div class="text-right">
+                        @if (Auth::guard('admin')->user()->nivel === 3)
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-purple-950 text-purple-300 border border-purple-800">
+                                Superadministrador (Nivel 3)
+                            </span>
+                        @elseif (Auth::guard('admin')->user()->nivel === 2)
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-950 text-blue-300 border border-blue-800">
+                                Administrador Editor (Nivel 2)
+                            </span>
+                        @else
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+                                Administrador Consulta (Nivel 1)
+                            </span>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="{{ route('admin.innovaciones.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
-                        <div class="font-semibold text-white">Innovaciones</div>
-                        <div class="text-slate-400 text-sm">Gestionar proyectos, metas y papelera</div>
-                    </a>
-                    <a href="{{ route('admin.categorias.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
-                        <div class="font-semibold text-white">Categorías</div>
-                        <div class="text-slate-400 text-sm">Consultar categorías temáticas</div>
-                    </a>
-                    <a href="{{ route('admin.usuarios.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
-                        <div class="font-semibold text-white">Usuarios</div>
-                        <div class="text-slate-400 text-sm">Listado general de usuarios</div>
-                    </a>
-                    <a href="{{ route('admin.roles.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
-                        <div class="font-semibold text-white">Roles</div>
-                        <div class="text-slate-400 text-sm">Consultar roles y permisos</div>
-                    </a>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Módulos de Consulta General</h3>
+                    @can('consultar')
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <a href="{{ route('admin.innovaciones.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
+                                <div class="font-semibold text-white">Innovaciones</div>
+                                <div class="text-slate-400 text-xs mt-1">Listado de proyectos</div>
+                            </a>
+                            <a href="{{ route('admin.categorias.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
+                                <div class="font-semibold text-white">Categorías</div>
+                                <div class="text-slate-400 text-xs mt-1">Listado de categorías</div>
+                            </a>
+                            <a href="{{ route('admin.usuarios.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
+                                <div class="font-semibold text-white">Usuarios</div>
+                                <div class="text-slate-400 text-xs mt-1">Directorio de usuarios</div>
+                            </a>
+                            <a href="{{ route('admin.roles.index') }}" class="p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors">
+                                <div class="font-semibold text-white">Roles</div>
+                                <div class="text-slate-400 text-xs mt-1">Catálogo de roles</div>
+                            </a>
+                        </div>
+                    @endcan
+                </div>
+
+                <div class="border-t border-slate-800 pt-6">
+                    <h3 class="text-lg font-semibold text-white mb-3">Operaciones de Creación y Edición</h3>
+                    @can('crear')
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-blue-950/30 border border-blue-900/50">
+                            <div>
+                                <div class="font-semibold text-white">Registro de Innovaciones</div>
+                                <div class="text-slate-400 text-xs mt-0.5">Autorizado para crear y modificar proyectos del sistema</div>
+                            </div>
+                            <a href="{{ route('admin.innovaciones.create') }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold transition-colors">
+                                Nueva Innovación
+                            </a>
+                        </div>
+                    @endcan
+
+                    @cannot('crear')
+                        <div class="p-4 rounded-xl bg-slate-800/30 border border-slate-800 flex items-center justify-between text-slate-500">
+                            <div>
+                                <div class="font-medium">Registro de Innovaciones</div>
+                                <div class="text-xs mt-0.5">Operación reservada para administradores de Nivel 2 o superior</div>
+                            </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded bg-slate-800 text-slate-400">
+                                No Autorizado
+                            </span>
+                        </div>
+                    @endcannot
+                </div>
+
+                <div class="border-t border-slate-800 pt-6">
+                    <h3 class="text-lg font-semibold text-white mb-3">Operaciones de Eliminación y Depuración</h3>
+                    @can('eliminar')
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-amber-950/30 border border-amber-900/50">
+                            <div>
+                                <div class="font-semibold text-white">Papelera de Reciclaje y Borrado</div>
+                                <div class="text-slate-400 text-xs mt-0.5">Autorizado para restaurar o eliminar registros definitivamente</div>
+                            </div>
+                            <a href="{{ route('admin.innovaciones.trash') }}" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-sm font-semibold transition-colors">
+                                Gestionar Papelera
+                            </a>
+                        </div>
+                    @endcan
+
+                    @cannot('eliminar')
+                        <div class="p-4 rounded-xl bg-slate-800/30 border border-slate-800 flex items-center justify-between text-slate-500">
+                            <div>
+                                <div class="font-medium">Papelera y Eliminación Definitiva</div>
+                                <div class="text-xs mt-0.5">Operación reservada exclusivamente para administradores de Nivel 3</div>
+                            </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded bg-slate-800 text-slate-400">
+                                Restringido
+                            </span>
+                        </div>
+                    @endcannot
+                </div>
+
+                <div class="border-t border-slate-800 pt-6">
+                    <h3 class="text-lg font-semibold text-white mb-3">Gestión de Cuentas Administrativas</h3>
+                    @can('administrar-cuentas')
+                        <div class="p-4 rounded-xl bg-purple-950/30 border border-purple-900/50 flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Control de Administradores</div>
+                                <div class="text-slate-400 text-xs mt-0.5">Acceso total a la asignación de niveles y estado de cuentas</div>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-purple-900/60 text-purple-200 border border-purple-700/50">
+                                Privilegios Activos
+                            </span>
+                        </div>
+                    @endcan
+
+                    @cannot('administrar-cuentas')
+                        <div class="p-4 rounded-xl bg-slate-800/30 border border-slate-800 flex items-center justify-between text-slate-500">
+                            <div>
+                                <div class="font-medium">Control de Administradores</div>
+                                <div class="text-xs mt-0.5">La gestión de cuentas administrativas requiere Nivel 3</div>
+                            </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded bg-slate-800 text-slate-400">
+                                Sin Permisos
+                            </span>
+                        </div>
+                    @endcannot
                 </div>
             </div>
         @endauth

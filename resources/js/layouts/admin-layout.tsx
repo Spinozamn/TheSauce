@@ -1,4 +1,4 @@
-import { Link, Head } from '@inertiajs/react';
+import { Link, Head, usePage } from '@inertiajs/react';
 import {
     Bell,
     Box,
@@ -61,6 +61,9 @@ const modulos = [
 ];
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
+    const { auth } = usePage<{ auth: { user?: { nombre?: string; nivel?: number; usuario?: string } } }>().props;
+    const user = auth?.user;
+
     return (
         <>
             <Head title="Panel Administrativo - TheSauce" />
@@ -102,11 +105,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                             Panel de Administración
                         </h1>
                         <div className="flex items-center gap-3">
-                            <span className="text-sm font-medium text-gray-600">
-                                Administrador
-                            </span>
+                            <div className="text-right">
+                                <div className="text-sm font-semibold text-gray-800">
+                                    {user?.nombre || user?.usuario || 'Administrador'}
+                                </div>
+                                {user?.nivel && (
+                                    <div className="text-xs font-medium text-slate-500">
+                                        Nivel {user.nivel} {user.nivel === 3 ? '(Total)' : user.nivel === 2 ? '(Edición)' : '(Consulta)'}
+                                    </div>
+                                )}
+                            </div>
                             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 font-bold text-white shadow-md">
-                                A
+                                {user?.nombre ? user.nombre.charAt(0) : 'A'}
                             </div>
                         </div>
                     </header>

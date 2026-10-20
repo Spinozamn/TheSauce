@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/{current_team}/dashboard', DashboardController::class);
 });
 
-Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth:admin', 'can:consultar'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return Inertia::render('admin/dashboard');
     })->name('dashboard');
@@ -47,18 +47,28 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     });
 
     Route::get('/innovaciones', [InnovacionController::class, 'index'])->name('innovaciones.index');
-    Route::get('/innovaciones/crear', [InnovacionController::class, 'create'])->name('innovaciones.create');
-    Route::get('/innovaciones/create', [InnovacionController::class, 'create']);
-    Route::get('/innovaciones/nuevo', [InnovacionController::class, 'create']);
-    Route::post('/innovaciones', [InnovacionController::class, 'store'])->name('innovaciones.store');
-    Route::get('/innovaciones/papelera', [InnovacionController::class, 'trash'])->name('innovaciones.trash');
+
+    Route::middleware(['can:crear'])->group(function () {
+        Route::get('/innovaciones/crear', [InnovacionController::class, 'create'])->name('innovaciones.create');
+        Route::get('/innovaciones/create', [InnovacionController::class, 'create']);
+        Route::get('/innovaciones/nuevo', [InnovacionController::class, 'create']);
+        Route::post('/innovaciones', [InnovacionController::class, 'store'])->name('innovaciones.store');
+    });
+
+    Route::middleware(['can:eliminar'])->group(function () {
+        Route::get('/innovaciones/papelera', [InnovacionController::class, 'trash'])->name('innovaciones.trash');
+        Route::delete('/innovaciones/{id}', [InnovacionController::class, 'destroy'])->name('innovaciones.destroy');
+        Route::patch('/innovaciones/{id}/restaurar', [InnovacionController::class, 'restore'])->name('innovaciones.restore');
+        Route::delete('/innovaciones/{id}/definitivo', [InnovacionController::class, 'forceDelete'])->name('innovaciones.forceDelete');
+    });
+
+    Route::middleware(['can:editar'])->group(function () {
+        Route::get('/innovaciones/{id}/edit', [InnovacionController::class, 'edit'])->name('innovaciones.edit');
+        Route::post('/innovaciones/{id}', [InnovacionController::class, 'update'])->name('innovaciones.update');
+        Route::put('/innovaciones/{id}', [InnovacionController::class, 'update']);
+    });
+
     Route::get('/innovaciones/{id}', [InnovacionController::class, 'show'])->name('innovaciones.show');
-    Route::get('/innovaciones/{id}/edit', [InnovacionController::class, 'edit'])->name('innovaciones.edit');
-    Route::post('/innovaciones/{id}', [InnovacionController::class, 'update'])->name('innovaciones.update');
-    Route::put('/innovaciones/{id}', [InnovacionController::class, 'update']);
-    Route::delete('/innovaciones/{id}', [InnovacionController::class, 'destroy'])->name('innovaciones.destroy');
-    Route::patch('/innovaciones/{id}/restaurar', [InnovacionController::class, 'restore'])->name('innovaciones.restore');
-    Route::delete('/innovaciones/{id}/definitivo', [InnovacionController::class, 'forceDelete'])->name('innovaciones.forceDelete');
 
     Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
     Route::get('/hitos-financieros', [HitoFinancieroController::class, 'index'])->name('hitos-financieros.index');
