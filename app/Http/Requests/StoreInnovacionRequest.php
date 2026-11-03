@@ -19,26 +19,26 @@ class StoreInnovacionRequest extends FormRequest
             'descripcion'     => ['required', 'string', 'min:20', 'max:2000'],
             'meta_financiera' => ['required', 'numeric', 'min:1000', 'max:10000000'],
             'fecha_inicio'    => ['required', 'date'],
-            'fecha_fin'       => ['required', 'date', 'after:fecha_inicio'],
-            'imagen'          => ['required', 'file', 'image', 'mimes:jpeg,png,webp,jpg', 'max:2048'], // Máximo 2MB (2048 KB)
+            'fecha_fin'       => ['required', 'date', 'after_or_equal:fecha_inicio'],
+            'imagen'          => ['required', 'file', 'image', 'mimes:jpeg,png,webp,jpg', 'max:2048'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'titulo.required'          => 'El título del proyecto es obligatorio.',
-            'titulo.min'               => 'El título debe tener al menos 5 caracteres.',
-            'categoria_id.required'    => 'Debes seleccionar una categoría válida.',
-            'categoria_id.exists'      => 'La categoría seleccionada no existe.',
-            'descripcion.min'          => 'La descripción debe contener un mínimo de 20 caracteres.',
+            'titulo.required'          => 'El titulo del proyecto es obligatorio.',
+            'titulo.min'               => 'El titulo debe tener al menos 5 caracteres.',
+            'categoria_id.required'    => 'Debes seleccionar una categoria valida.',
+            'categoria_id.exists'      => 'La categoria seleccionada no existe.',
+            'descripcion.min'          => 'La descripcion debe contener un minimo de 20 caracteres.',
             'meta_financiera.required' => 'La meta financiera es requerida.',
-            'meta_financiera.min'      => 'La meta debe ser de al menos $1,000 MXN.',
-            'fecha_fin.after'          => 'La fecha de finalización debe ser posterior a la fecha de inicio.',
+            'meta_financiera.min'      => 'La meta debe ser de al menos 1000.',
+            'fecha_fin.after_or_equal' => 'La fecha de finalizacion debe ser igual o posterior a la fecha de inicio.',
             'imagen.required'          => 'Es obligatorio subir una imagen de portada.',
             'imagen.image'             => 'El archivo debe ser una imagen.',
             'imagen.mimes'             => 'La imagen debe estar en formato JPG, JPEG, PNG o WEBP.',
-            'imagen.max'               => 'La imagen no puede pesar más de 2MB.',
+            'imagen.max'               => 'La imagen no puede pesar mas de 2MB.',
         ];
     }
 }

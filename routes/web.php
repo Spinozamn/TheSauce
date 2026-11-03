@@ -12,21 +12,25 @@ use App\Http\Controllers\HitoFinancieroController;
 use App\Http\Controllers\InnovacionController;
 use App\Http\Controllers\ListaDeseoController;
 use App\Http\Controllers\LogSistemaController;
-use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Auth\UnifiedLoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/proyectos/{id}', [HomeController::class, 'show'])->name('proyectos.show');
+
+Route::get('/login', [UnifiedLoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UnifiedLoginController::class, 'login'])->name('login.store');
+Route::post('/logout', [UnifiedLoginController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+    Route::get('/login', fn () => redirect()->route('login'))->name('login');
+    Route::post('/login', [UnifiedLoginController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [UnifiedLoginController::class, 'logout'])->name('logout');
     Route::get('/portal', function () {
         return view('admin.portal');
     })->name('portal');
@@ -64,8 +68,7 @@ Route::middleware(['auth:admin', 'can:consultar'])->prefix('admin')->name('admin
 
     Route::middleware(['can:editar'])->group(function () {
         Route::get('/innovaciones/{id}/edit', [InnovacionController::class, 'edit'])->name('innovaciones.edit');
-        Route::post('/innovaciones/{id}', [InnovacionController::class, 'update'])->name('innovaciones.update');
-        Route::put('/innovaciones/{id}', [InnovacionController::class, 'update']);
+        Route::match(['post', 'put'], '/innovaciones/{id}', [InnovacionController::class, 'update'])->name('innovaciones.update');
     });
 
     Route::get('/innovaciones/{id}', [InnovacionController::class, 'show'])->name('innovaciones.show');

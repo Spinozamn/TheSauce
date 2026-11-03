@@ -63,7 +63,7 @@ class InnovacionController extends Controller
             if ($request->hasFile('imagen')) {
                 $archivo = $request->file('imagen');
                 $extension = $archivo->getClientOriginalExtension();
-                $nombreArchivo = "Innovacion_{$innovacion->id}_1.{$extension}";
+                $nombreArchivo = "innovacion_{$innovacion->id}.{$extension}";
 
                 $archivo->storeAs('innovaciones', $nombreArchivo, 'public');
 
@@ -75,7 +75,7 @@ class InnovacionController extends Controller
 
         return redirect()->route('admin.innovaciones.index')->with('toast', [
             'type'    => 'success',
-            'message' => '¡Innovación registrada exitosamente!',
+            'message' => 'Innovacion registrada exitosamente.',
         ]);
     }
 
@@ -134,7 +134,7 @@ class InnovacionController extends Controller
         if (!$innovacion) {
             return redirect()->route('admin.innovaciones.index')->with('toast', [
                 'type'    => 'error',
-                'message' => "No se puede actualizar. La innovación con ID #{$id} no existe.",
+                'message' => "No se puede actualizar. La innovacion con ID #{$id} no existe.",
             ]);
         }
 
@@ -161,7 +161,7 @@ class InnovacionController extends Controller
 
                 $archivo = $request->file('imagen');
                 $extension = $archivo->getClientOriginalExtension();
-                $nombreArchivo = "Innovacion_{$innovacion->id}_1.{$extension}";
+                $nombreArchivo = "innovacion_{$innovacion->id}.{$extension}";
 
                 $archivo->storeAs('innovaciones', $nombreArchivo, 'public');
 
@@ -173,7 +173,7 @@ class InnovacionController extends Controller
 
         return redirect()->route('admin.innovaciones.index')->with('toast', [
             'type'    => 'success',
-            'message' => '¡Innovación actualizada exitosamente!',
+            'message' => 'Innovacion actualizada exitosamente.',
         ]);
     }
 
@@ -194,7 +194,7 @@ class InnovacionController extends Controller
 
         return redirect()->route('admin.innovaciones.index')->with('toast', [
             'type'    => 'success',
-            'message' => '¡Innovación enviada a la papelera exitosamente!',
+            'message' => 'Innovacion enviada a la papelera exitosamente.',
         ]);
     }
 
@@ -221,7 +221,7 @@ class InnovacionController extends Controller
         if (!$innovacion) {
             return redirect()->route('admin.innovaciones.trash')->with('toast', [
                 'type'    => 'error',
-                'message' => "No se encontró el registro con ID #{$id} en la papelera.",
+                'message' => "No se encontro el registro con ID #{$id} en la papelera.",
             ]);
         }
 
@@ -229,7 +229,7 @@ class InnovacionController extends Controller
 
         return redirect()->route('admin.innovaciones.trash')->with('toast', [
             'type'    => 'success',
-            'message' => '¡Innovación restaurada exitosamente!',
+            'message' => 'Innovacion restaurada exitosamente.',
         ]);
     }
 
@@ -246,28 +246,16 @@ class InnovacionController extends Controller
             ]);
         }
 
-        $dependencias = [];
-        if ($innovacion->contribuciones()->exists()) {
-            $dependencias[] = 'contribuciones financieras';
-        }
-        if ($innovacion->comentarios()->exists()) {
-            $dependencias[] = 'comentarios';
-        }
-        if ($innovacion->hitosFinancieros()->exists()) {
-            $dependencias[] = 'hitos financieros';
-        }
-        if ($innovacion->carritoDetalles()->exists()) {
-            $dependencias[] = 'registros en carritos';
-        }
-        if ($innovacion->listaDeseos()->exists()) {
-            $dependencias[] = 'listas de deseos';
-        }
+        $tieneDependencias = $innovacion->contribuciones()->exists()
+            || $innovacion->comentarios()->exists()
+            || $innovacion->hitosFinancieros()->exists()
+            || $innovacion->carritoDetalles()->exists()
+            || $innovacion->listaDeseos()->exists();
 
-        if (!empty($dependencias)) {
-            $motivo = implode(', ', $dependencias);
+        if ($tieneDependencias) {
             return redirect()->route('admin.innovaciones.trash')->with('toast', [
                 'type'    => 'error',
-                'message' => "No se puede eliminar definitivamente. El registro tiene dependencias activas: {$motivo}.",
+                'message' => 'No se puede eliminar definitivamente una innovacion con dependencias activas.',
             ]);
         }
 
@@ -285,7 +273,7 @@ class InnovacionController extends Controller
 
         return redirect()->route('admin.innovaciones.trash')->with('toast', [
             'type'    => 'success',
-            'message' => '¡Innovación y su imagen asociada fueron eliminadas definitivamente!',
+            'message' => 'Innovacion y su imagen asociada fueron eliminadas definitivamente.',
         ]);
     }
 }

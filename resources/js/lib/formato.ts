@@ -12,3 +12,17 @@ export const formatoFecha = (fecha: string | null): string =>
               year: 'numeric',
           })
         : '—';
+
+export const calcularPorcentaje = (
+    recaudado: number | string,
+    meta: number | string
+): number => {
+    const r = Number(recaudado) || 0;
+    const m = Number(meta) || 1;
+    return Math.round((r / m) * 100);
+};
+
+export const calcularDiasRestantes = (fechaFin: string): number => {
+    const diff = new Date(fechaFin).getTime() - Date.now();
+    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+};

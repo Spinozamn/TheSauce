@@ -23,27 +23,42 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('consultar', function ($user = null) {
             $user = $user ?? Auth::guard('admin')->user();
-            return $user instanceof Administrador && $user->activo && $user->nivel >= 1;
+            if (!$user instanceof Administrador || !$user->activo || $user->nivel < 1) {
+                return false;
+            }
+            return !method_exists($user, 'currentAccessToken') || !$user->currentAccessToken() || $user->tokenCan('innovaciones:consultar');
         });
 
         Gate::define('crear', function ($user = null) {
             $user = $user ?? Auth::guard('admin')->user();
-            return $user instanceof Administrador && $user->activo && $user->nivel >= 2;
+            if (!$user instanceof Administrador || !$user->activo || $user->nivel < 2) {
+                return false;
+            }
+            return !method_exists($user, 'currentAccessToken') || !$user->currentAccessToken() || $user->tokenCan('innovaciones:crear');
         });
 
         Gate::define('editar', function ($user = null) {
             $user = $user ?? Auth::guard('admin')->user();
-            return $user instanceof Administrador && $user->activo && $user->nivel >= 2;
+            if (!$user instanceof Administrador || !$user->activo || $user->nivel < 2) {
+                return false;
+            }
+            return !method_exists($user, 'currentAccessToken') || !$user->currentAccessToken() || $user->tokenCan('innovaciones:editar');
         });
 
         Gate::define('eliminar', function ($user = null) {
             $user = $user ?? Auth::guard('admin')->user();
-            return $user instanceof Administrador && $user->activo && $user->nivel >= 3;
+            if (!$user instanceof Administrador || !$user->activo || $user->nivel < 3) {
+                return false;
+            }
+            return !method_exists($user, 'currentAccessToken') || !$user->currentAccessToken() || $user->tokenCan('innovaciones:eliminar');
         });
 
         Gate::define('administrar-cuentas', function ($user = null) {
             $user = $user ?? Auth::guard('admin')->user();
-            return $user instanceof Administrador && $user->activo && $user->nivel >= 3;
+            if (!$user instanceof Administrador || !$user->activo || $user->nivel < 3) {
+                return false;
+            }
+            return !method_exists($user, 'currentAccessToken') || !$user->currentAccessToken() || $user->tokenCan('administradores:gestionar');
         });
     }
 

@@ -164,3 +164,60 @@ export interface LogSistemaVista {
     ip_origen: string;
     fecha_registro: string;
 }
+
+export interface SesionUsuario {
+    id: number;
+    nombre: string;
+    email: string;
+}
+
+export interface CategoriaPublica {
+    id: number;
+    nombre: string;
+    icono?: string | null;
+}
+
+export interface UsuarioPublico {
+    id: number;
+    nombre: string;
+    apellido_paterno?: string | null;
+    email?: string;
+}
+
+export interface HitoPublico {
+    id: number;
+    titulo: string;
+    descripcion: string;
+    monto_objetivo: number | string;
+    alcanzado?: boolean;
+}
+
+export interface ComentarioPublico {
+    id: number;
+    comentario: string;
+    created_at: string;
+    usuario?: UsuarioPublico | null;
+}
+
+export interface ContribucionPublica {
+    id: number;
+    monto: number | string;
+    usuario?: UsuarioPublico | null;
+}
+
+export interface InnovacionPublica {
+    id: number;
+    titulo: string;
+    descripcion: string;
+    meta_financiera: number | string;
+    monto_recaudado: number | string;
+    estado: string;
+    fecha_inicio: string;
+    fecha_fin: string;
+    imagen_portada?: string | null;
+    categoria?: CategoriaPublica | null;
+    usuario?: UsuarioPublico | null;
+    hitos_financieros?: HitoPublico[];
+    comentarios?: ComentarioPublico[];
+    contribuciones?: ContribucionPublica[];
+}
