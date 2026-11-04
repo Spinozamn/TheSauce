@@ -36,6 +36,19 @@ class Innovacion extends Model
         'fecha_fin' => 'date',
     ];
 
+    protected $appends = ['imagen_url'];
+
+    public function getImagenUrlAttribute(): ?string
+    {
+        if (!$this->imagen_portada) {
+            return null;
+        }
+        if (str_starts_with($this->imagen_portada, 'http://') || str_starts_with($this->imagen_portada, 'https://')) {
+            return $this->imagen_portada;
+        }
+        return asset('storage/' . ltrim($this->imagen_portada, '/'));
+    }
+
     public function usuario(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'usuario_id');
