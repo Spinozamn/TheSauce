@@ -36,7 +36,17 @@ class Innovacion extends Model
         'fecha_fin' => 'date',
     ];
 
-    protected $appends = ['imagen_url'];
+    protected $appends = ['imagen_url', 'user_id'];
+
+    public function getUserIdAttribute(): ?int
+    {
+        $email = $this->usuario?->email;
+        if (!$email) {
+            return null;
+        }
+        $user = User::where('email', $email)->first();
+        return $user?->id;
+    }
 
     public function getImagenUrlAttribute(): ?string
     {

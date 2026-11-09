@@ -49,6 +49,11 @@ class User extends Authenticatable implements PasskeyUser
         return $this->name ?? '';
     }
 
+    public function usuario(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Usuario::class, 'email', 'email');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Administrador;
+use App\Models\Innovacion;
+use App\Models\User;
+use App\Models\Usuario;
+use App\Policies\ClienteInnovacionPolicy;
+use App\Policies\InnovacionAdminPolicy;
+use App\Policies\InnovacionPolicy;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -20,6 +26,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+
+        Gate::policy(Innovacion::class, InnovacionPolicy::class);
+
+        Gate::define('manage-own-resource', function (User $user, Innovacion $recurso) {
+            if ($recurso->user_id !== null && (int) $recurso->user_id === (int) $user->id) {
+                return true;
+            }
+            $usuario = Usuario::where('email', $user->email)->first();
+            if ($usuario && (int) $recurso->usuario_id === (int) $usuario->id) {
+                return true;
+            }
+            return false;
+        });
 
         Gate::define('consultar', function ($user = null) {
             $user = $user ?? Auth::guard('admin')->user();
