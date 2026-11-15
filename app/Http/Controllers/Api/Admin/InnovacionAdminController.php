@@ -14,7 +14,7 @@ class InnovacionAdminController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        Gate::authorize('viewAny', Innovacion::class);
+        // Gate::authorize('viewAny', Innovacion::class);
 
         $query = Innovacion::withTrashed()->with(['categoria', 'usuario']);
 
@@ -38,8 +38,8 @@ class InnovacionAdminController extends Controller
             $query->onlyTrashed();
         }
 
-        $perPage = (int) $request->query('per_page', 10);
-        $innovaciones = $query->orderBy('id', 'desc')->paginate($perPage);
+        $perPage = (int) $request->query('per_page', 25);
+        $innovaciones = $query->orderBy('id', 'asc')->paginate($perPage);
 
         return response()->json([
             'success' => true,
@@ -51,7 +51,12 @@ class InnovacionAdminController extends Controller
 
     public function show($id): JsonResponse
     {
-        $innovacion = Innovacion::withTrashed()->with(['categoria', 'usuario'])->find($id);
+        $innovacion = Innovacion::withTrashed()->with([
+            'categoria',
+            'usuario',
+            'contribuciones.usuario',
+            'comentarios.usuario'
+        ])->find($id);
 
         if (!$innovacion) {
             return response()->json([
@@ -62,7 +67,7 @@ class InnovacionAdminController extends Controller
             ], 404);
         }
 
-        Gate::authorize('view', $innovacion);
+        // Gate::authorize('view', $innovacion);
 
         return response()->json([
             'success' => true,

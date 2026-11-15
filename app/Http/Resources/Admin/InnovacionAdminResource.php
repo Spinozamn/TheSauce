@@ -33,12 +33,35 @@ class InnovacionAdminResource extends JsonResource
             'usuario_creador'   => $this->whenLoaded('usuario', function () {
                 return [
                     'id'     => $this->usuario->id,
-                    'nombre' => $this->usuario->nombre,
+                    'nombre' => trim($this->usuario->nombre . ' ' . ($this->usuario->apellido_paterno ?? '')),
                     'email'  => $this->usuario->email,
                 ];
             }),
             'fecha_inicio'      => $this->fecha_inicio ? $this->fecha_inicio->toIso8601String() : null,
             'fecha_fin'         => $this->fecha_fin ? $this->fecha_fin->toIso8601String() : null,
+            'contribuciones'    => $this->whenLoaded('contribuciones', function () {
+                return $this->contribuciones->map(function ($c) {
+                    return [
+                        'id'          => $c->id,
+                        'monto'       => number_format((float) $c->monto, 2, '.', ''),
+                        'metodo_pago' => $c->metodo_pago,
+                        'estado'      => $c->estado,
+                        'donador'     => $c->usuario ? trim($c->usuario->nombre . ' ' . ($c->usuario->apellido_paterno ?? '')) : 'Anonimo',
+                        'fecha'       => $c->fecha_contribucion ?? ($c->created_at ? $c->created_at->toIso8601String() : null),
+                    ];
+                });
+            }),
+            'comentarios'       => $this->whenLoaded('comentarios', function () {
+                return $this->comentarios->map(function ($cm) {
+                    return [
+                        'id'        => $cm->id,
+                        'contenido' => $cm->contenido,
+                        'autor'     => $cm->usuario ? trim($cm->usuario->nombre . ' ' . ($cm->usuario->apellido_paterno ?? '')) : 'Anonimo',
+                        'es_respuesta' => (bool) $cm->es_respuesta,
+                        'fecha'     => $cm->fecha_comentario ?? ($cm->created_at ? $cm->created_at->toIso8601String() : null),
+                    ];
+                });
+            }),
             'created_at'        => $this->created_at ? $this->created_at->toIso8601String() : null,
             'updated_at'        => $this->updated_at ? $this->updated_at->toIso8601String() : null,
         ];

@@ -14,7 +14,7 @@ class AdministradorSeeder extends Seeder
         Administrador::updateOrCreate(
             ['usuario' => 'admin_consulta'],
             [
-                'nombre'   => 'Administrador de Consulta',
+                'nombre'   => 'Administrador de consulta',
                 'email'    => 'consulta@thesauce.test',
                 'password' => Hash::make('Admin1234#'),
                 'activo'   => true,
@@ -25,7 +25,7 @@ class AdministradorSeeder extends Seeder
         Administrador::updateOrCreate(
             ['usuario' => 'admin_editor'],
             [
-                'nombre'   => 'Administrador de Edición',
+                'nombre'   => 'Administrador de edicion',
                 'email'    => 'editor@thesauce.test',
                 'password' => Hash::make('Admin1234#'),
                 'activo'   => true,
@@ -36,7 +36,7 @@ class AdministradorSeeder extends Seeder
         Administrador::updateOrCreate(
             ['usuario' => 'admin_general'],
             [
-                'nombre'   => 'Administrador General',
+                'nombre'   => 'Administrador general',
                 'email'    => 'admin@thesauce.test',
                 'password' => Hash::make('Admin1234#'),
                 'activo'   => true,
@@ -47,7 +47,7 @@ class AdministradorSeeder extends Seeder
         Administrador::updateOrCreate(
             ['usuario' => 'admin_bloqueado'],
             [
-                'nombre'   => 'Administrador Suspendido',
+                'nombre'   => 'Administrador suspendido',
                 'email'    => 'bloqueado@thesauce.test',
                 'password' => Hash::make('Admin1234#'),
                 'activo'   => false,
