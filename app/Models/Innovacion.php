@@ -56,7 +56,11 @@ class Innovacion extends Model
         if (str_starts_with($this->imagen_portada, 'http://') || str_starts_with($this->imagen_portada, 'https://')) {
             return $this->imagen_portada;
         }
-        return asset('storage/' . ltrim($this->imagen_portada, '/'));
+        $ruta = ltrim($this->imagen_portada, '/');
+        if (str_starts_with($ruta, 'storage/')) {
+            return asset($ruta);
+        }
+        return asset('storage/' . $ruta);
     }
 
     public function usuario(): BelongsTo
