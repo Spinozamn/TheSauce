@@ -34,6 +34,7 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/catalogo', [ClientRegistroController::class, 'catalogo']);
         Route::get('/catalogo/{id}', [ClientRegistroController::class, 'catalogoDetalle']);
+        Route::get('/secciones', [ClientRegistroController::class, 'secciones']);
 
         Route::middleware('auth:sanctum')->group(function () {
             Route::post('/logout', [ClientAuthController::class, 'logout']);

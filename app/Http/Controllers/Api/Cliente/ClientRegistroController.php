@@ -51,6 +51,41 @@ class ClientRegistroController extends Controller
         ], 200);
     }
 
+    public function secciones(): JsonResponse
+    {
+        $totalActivos = Innovacion::whereIn('estado', ['activo', 'financiado'])->count();
+        $totalRecaudado = (float) Innovacion::sum('monto_recaudado');
+        $metaGlobal = (float) Innovacion::sum('meta_financiera');
+        $porcentajeGlobal = $metaGlobal > 0 ? round(($totalRecaudado / $metaGlobal) * 100, 2) : 0.0;
+
+        $categorias = \App\Models\Categoria::where('estado', 'activa')
+            ->withCount('innovaciones')
+            ->orderBy('nombre')
+            ->get();
+
+        $destacados = Innovacion::with(['categoria'])
+            ->whereIn('estado', ['activo', 'financiado'])
+            ->orderByDesc('monto_recaudado')
+            ->limit(3)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Informacion de secciones y estadisticas consultada exitosamente.',
+            'data'    => [
+                'estadisticas' => [
+                    'total_activos'     => $totalActivos,
+                    'total_recaudado'   => number_format($totalRecaudado, 2, '.', ''),
+                    'meta_global'       => number_format($metaGlobal, 2, '.', ''),
+                    'porcentaje_global' => $porcentajeGlobal,
+                ],
+                'categorias'   => $categorias,
+                'destacados'   => ClientInnovacionResource::collection($destacados),
+            ],
+            'errors'  => null,
+        ], 200);
+    }
+
     public function index(Request $request): JsonResponse
     {
         $actor = $request->user();
