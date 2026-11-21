@@ -31,6 +31,19 @@ class ClientInnovacionResource extends JsonResource
                     'icono'  => $this->categoria->icono,
                 ];
             }),
+            'comentarios'       => $this->whenLoaded('comentarios', function () {
+                return $this->comentarios->map(function ($c) {
+                    return [
+                        'id'               => $c->id,
+                        'contenido'        => $c->contenido,
+                        'fecha_comentario' => $c->fecha_comentario ?? ($c->created_at ? $c->created_at->format('Y-m-d') : null),
+                        'usuario'          => [
+                            'id'     => $c->usuario?->id,
+                            'nombre' => $c->usuario ? trim($c->usuario->nombre . ' ' . $c->usuario->apellido_paterno) : 'Anonimo',
+                        ],
+                    ];
+                });
+            }),
             'fecha_inicio'      => $this->fecha_inicio ? $this->fecha_inicio->toIso8601String() : null,
             'fecha_fin'         => $this->fecha_fin ? $this->fecha_fin->toIso8601String() : null,
             'created_at'        => $this->created_at ? $this->created_at->toIso8601String() : null,

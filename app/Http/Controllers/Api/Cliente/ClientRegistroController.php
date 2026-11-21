@@ -32,7 +32,7 @@ class ClientRegistroController extends Controller
 
     public function catalogoDetalle(string|int $id): JsonResponse
     {
-        $innovacion = Innovacion::with(['categoria'])->find($id);
+        $innovacion = Innovacion::with(['categoria', 'comentarios.usuario'])->find($id);
 
         if (!$innovacion) {
             return response()->json([
@@ -153,7 +153,7 @@ class ClientRegistroController extends Controller
 
     public function show(Request $request, string|int $id): JsonResponse
     {
-        $registro = Innovacion::with(['categoria'])->find($id);
+        $registro = Innovacion::with(['categoria', 'comentarios.usuario'])->find($id);
 
         if (!$registro) {
             return response()->json([
